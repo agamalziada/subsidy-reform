@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>الأعباء السنوية على البقال التمويني قبل أي تطوير</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Tajawal",sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-right:3px solid #D85A30;padding-right:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #D85A30;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  @media(prefers-color-scheme:dark){body{background:#1a1a18;color:#d3d1c7;}.callout{background:#2c2c2a;color:#b4b2a9;}.subtitle,.source{color:#b4b2a9;}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ⑤ من ⑤</p>
+    <p class="title">الأعباء السنوية على البقال التمويني قبل أي تطوير</p>
+    <p class="subtitle">جنيه / سنة — على بقال ربحه 25 قرشاً في العبوة</p>
+  </div>
+  <div class="callout">"ما لا يقل عن 55,000 جنيه أعباء سنوية ثابتة — قبل حتى البدء في تكلفة تطوير المنفذ"</div>
+  
+<div style="background:#faece7;border-right:3px solid #D85A30;padding:9px 12px;margin-bottom:12px;border-radius:0 6px 6px 0">
+  <div style="font-size:11px;color:#5f5e5a;margin-bottom:2px">إجمالي الأعباء السنوية الثابتة</div>
+  <div id="total" style="font-size:26px;font-weight:800;color:#D85A30">0</div>
+  <div style="font-size:11px;color:#5f5e5a;margin-top:1px">جنيه / سنة (كحد أدنى)</div>
+</div>
+<div class="chart-wrap" style="height:185px"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",amber=dk?"#FAC775":"#BA7517",blue=dk?"#85B7EB":"#378ADD";
+  var s=null;
+  function cu(ts){
+    if(!s)s=ts;
+    var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);
+    document.getElementById("total").textContent=Math.round(e*55800).toLocaleString("ar-EG");
+    if(p<1)requestAnimationFrame(cu);
+    else document.getElementById("total").textContent="+55,800";
+  }
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+  new Chart(document.getElementById("c"),{
+    type:"bar",
+    data:{
+      labels:[["ضرائب","سنوية"],["نقل البضائع","(تقديري)"],["تأمينات","اجتماعية"]],
+      datasets:[{data:[27000,16800,12000],backgroundColor:[coral,amber,blue],borderWidth:0,borderRadius:5}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*120;}},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:dk?"#2c2c2a":"#fff",
+          borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",
+          borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",
+          bodyColor:tc,padding:10,
+          titleFont:{family:"Tajawal"},bodyFont:{family:"Tajawal"},
+          callbacks:{label:function(c){return c.raw.toLocaleString("ar-EG")+" جنيه / سنة";}}
+        }
+      },
+      scales:{
+        x:{ticks:{color:tc,font:{size:10,family:"Tajawal"}},grid:{display:false},border:{color:gc}},
+        y:{ticks:{color:tc,font:{size:10,family:"Tajawal"},callback:function(v){return (v/1000)+"k";}},grid:{color:gc},border:{display:false}}
+      }
+    }
+  });
+})();
+</script>
+  <p class="source">المصدر: علي أبو زراير، بدّال تمويني بالشرقية</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById("root").offsetHeight;
+  window.parent.postMessage({type:"chartResize",height:h},"*");
+},1400);
+</script>
+</body></html>
