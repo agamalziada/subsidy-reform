@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>What a Subsidy Dealer Earns Per Pack of Sugar</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:#2c2c2a;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-left:3px solid #D85A30;padding-left:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.55;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;}
+  @media(prefers-color-scheme:dark){body{background:#1a1a18;color:#d3d1c7;}.callout{background:#2c2c2a;color:#b4b2a9;}.subtitle,.source{color:#b4b2a9;}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 &middot; Chart 3 of 5</p>
+    <p class="title">What a Subsidy Dealer Earns Per Pack of Sugar</p>
+    <p class="subtitle">25 piasters — then the state asks them to fund an outlet upgrade</p>
+  </div>
+  <div class="callout">"The profit margin on some subsidized goods does not exceed 25 piasters per pack."</div>
+  
+<div style="text-align:center;background:#faece7;border-radius:10px;padding:14px;margin-bottom:14px">
+  <div style="font-size:11px;color:#5f5e5a;margin-bottom:4px">Profit per pack of subsidized goods</div>
+  <div id="pct" style="font-size:44px;font-weight:800;color:#D85A30;line-height:1">0</div>
+  <div style="font-size:13px;font-weight:700;color:#D85A30;margin-top:3px">piasters (EGP 0.25)</div>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+  <div style="flex:1;min-width:90px;background:#f1efe8;border-radius:7px;padding:9px 11px">
+    <div style="font-size:17px;font-weight:700;color:#2c2c2a">10–12</div>
+    <div style="font-size:10px;color:#5f5e5a;margin-top:1px">hours of work per day</div>
+  </div>
+  <div style="flex:1;min-width:90px;background:#f1efe8;border-radius:7px;padding:9px 11px">
+    <div style="font-size:17px;font-weight:700;color:#D85A30">EGP 27K</div>
+    <div style="font-size:10px;color:#5f5e5a;margin-top:1px">annual taxes</div>
+  </div>
+  <div style="flex:1;min-width:90px;background:#f1efe8;border-radius:7px;padding:9px 11px">
+    <div style="font-size:17px;font-weight:700;color:#D85A30">EGP 1K</div>
+    <div style="font-size:10px;color:#5f5e5a;margin-top:1px">social insurance / month</div>
+  </div>
+</div>
+<div style="background:#faece7;border-left:3px solid #D85A30;padding:8px 12px;border-radius:0 6px 6px 0;font-size:11px;color:#993C1D;line-height:1.6">
+  &#9888; 25 piasters profit per pack, 12-hour workdays — then the state asks this dealer to fund a full outlet upgrade
+</div>
+<script>
+(function(){
+  var s=null;
+  function cu(ts){
+    if(!s)s=ts;
+    var p=Math.min((ts-s)/700,1),e=1-Math.pow(1-p,3);
+    document.getElementById("pct").textContent=Math.round(e*25);
+    if(p<1)requestAnimationFrame(cu);
+    else document.getElementById("pct").textContent="25";
+  }
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+})();
+</script>
+  <p class="source">Source: Mona El-Sayed / Ali Abu Zaraier — subsidy branch owners</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById("root").offsetHeight;
+  window.parent.postMessage({type:"chartResize",height:h},"*");
+},1400);
+</script>
+</body></html>

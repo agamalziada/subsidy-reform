@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>"Super Tawfeer" Network: Progress Toward the 2027 Target</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:#2c2c2a;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-left:3px solid #1D9E75;padding-left:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:600;line-height:1.35;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #1D9E75;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.55;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;}
+  @media(prefers-color-scheme:dark){body{background:#1a1a18;color:#d3d1c7;}.callout{background:#2c2c2a;color:#b4b2a9;}.subtitle,.source{color:#b4b2a9;}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 &middot; Chart 4 of 5</p>
+    <p class="title">"Super Tawfeer" Network: Progress Toward the 2027 Target</p>
+    <p class="subtitle">Mostaqbal Misr outlets — 71.4% of target achieved</p>
+  </div>
+  <div class="callout">"1,427 outlets operating across governorates, targeting 2,000 by 2027 — then the plan is to absorb 40,000 additional dealers."</div>
+  
+<div style="display:flex;gap:10px;margin-bottom:12px">
+  <div style="flex:1;background:#edf7f3;border-radius:8px;padding:11px 13px;text-align:center">
+    <div style="font-size:11px;font-weight:600;color:#0F6E56;margin-bottom:3px">Achieved so far</div>
+    <div id="v1" style="font-size:26px;font-weight:800;color:#1D9E75;line-height:1">0</div>
+    <div style="font-size:10px;color:#0F6E56;margin-top:2px">outlets</div>
+  </div>
+  <div style="flex:1;background:#f1efe8;border-radius:8px;padding:11px 13px;text-align:center">
+    <div style="font-size:11px;font-weight:600;color:#5f5e5a;margin-bottom:3px">Target by 2027</div>
+    <div style="font-size:26px;font-weight:800;color:#888780;line-height:1">2,000</div>
+    <div style="font-size:10px;color:#5f5e5a;margin-top:2px">outlets</div>
+  </div>
+</div>
+<div style="margin-bottom:6px;font-size:11px;color:#5f5e5a;display:flex;justify-content:space-between">
+  <span>Progress</span>
+  <span id="pct-lbl" style="font-weight:700;color:#1D9E75">0%</span>
+</div>
+<div style="height:32px;background:#f1efe8;border-radius:6px;overflow:hidden;margin-bottom:12px;position:relative">
+  <div id="fill" style="height:100%;width:0;background:#1D9E75;border-radius:6px;transition:width 1.3s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding-left:12px">
+    <span id="fill-lbl" style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap"></span>
+  </div>
+  <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;color:#888780">573 remaining</span>
+</div>
+<div style="background:#f1efe8;border-radius:7px;padding:9px 12px;font-size:11px;color:#5f5e5a;line-height:1.6">
+  Longer-term target: absorb <strong style="color:#2c2c2a">40,000 additional</strong> subsidy dealers into the Mostaqbal Misr network
+</div>
+<script>
+(function(){
+  setTimeout(function(){
+    document.getElementById("fill").style.width="71.4%";
+    document.getElementById("fill-lbl").textContent="1,427 outlets";
+    var s=null;
+    function cu(ts){
+      if(!s)s=ts;
+      var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);
+      document.getElementById("v1").textContent=Math.round(e*1427).toLocaleString();
+      document.getElementById("pct-lbl").textContent=Math.round(e*71.4)+"%";
+      if(p<1)requestAnimationFrame(cu);
+      else{document.getElementById("v1").textContent="1,427";document.getElementById("pct-lbl").textContent="71.4%";}
+    }
+    requestAnimationFrame(cu);
+  },200);
+})();
+</script>
+  <p class="source">Source: Mostaqbal Misr official page</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById("root").offsetHeight;
+  window.parent.postMessage({type:"chartResize",height:h},"*");
+},1400);
+</script>
+</body></html>
